@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+ul,li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: #424242;
+    display: block;
+    padding: 10px;
+    border-bottom: solid 1px #ccc;
+}
+#loading{
+    display: none;
+    width: 100px;
+    line-height: 30px;
+    position: fixed;
+    left: 50%;
+    top:50%;
+    margin-left:-50px;
+    margin-top: -15px;
+    text-align: center;
+    background:rgba(0,0,0,.6);
+    color: #fff;
+    border-radius: 4px;
+}
+fieldset{
+    margin: 10px;
+}
+p{
+    padding: 10px;
+}
+.back{
+    color: red;
+    
+}

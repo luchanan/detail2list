@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="keywords" content="" >
+        <meta name="description" content="">
+        <meta content="yes" name="apple-mobile-web-app-capable" />
+        <meta content="yes" name="apple-touch-fullscreen" />
+        <meta name="full-screen" content="yes">
+        <meta name="x5-fullscreen" content="true" />
+        <meta name="screen-orientation" content="portrait">
+        <meta name="x5-orientation" content="portrait">
+        <meta content="telephone=no,email=no" name="format-detection" />
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="demo.css">
+        <title>详情返回列表，保持原有列表位置，而不是重新刷新</title>
+    </head>
+    <body>
+        <ul id="list">
+            
+        </ul>
+        <div id="loading">loading...</div>
+        <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+        <script type="text/javascript">
+            window.localStorage.removeItem("detail2list");
+        </script>
+    </body>
+</html>

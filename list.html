@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="keywords" content="" >
+        <meta name="description" content="">
+        <meta content="yes" name="apple-mobile-web-app-capable" />
+        <meta content="yes" name="apple-touch-fullscreen" />
+        <meta name="full-screen" content="yes">
+        <meta name="x5-fullscreen" content="true" />
+        <meta name="screen-orientation" content="portrait">
+        <meta name="x5-orientation" content="portrait">
+        <meta content="telephone=no,email=no" name="format-detection" />
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="demo.css">
+        <title>详情返回列表，保持原有列表位置，而不是重新刷新</title>
+    </head>
+    <body>
+        <ul id="list">
+            
+        </ul>
+        <div id="loading">loading...</div>
+        <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+        <script type="text/javascript" src="detail2list.js"></script>
+        <script type="text/javascript">
+            var detail2list=new h5Detail2list();
+            var scrolling=false;
+            var listnum=0;
+            if($.isEmptyObject(detail2list.getLocalStorage()['extraData'])){
+                getList(20);
+            }
+            function getList(num){
+                var li='';
+                listnum=$.isEmptyObject(detail2list.getLocalStorage()['extraData'])?listnum:detail2list.getLocalStorage()['extraData']['lastIndex'];
+                for(i=listnum;i<(num+listnum);i++){
+                    li+='<li><a href="detail.html">list'+(i+1)+'</a></li>';
+                }
+                $("#list").append(li);
+                hideLoading();
+                listnum=num+listnum;
+            }
+            function showLoading(){
+                scrolling=true;
+                $("#loading").show();
+            }
+            function hideLoading(){
+                scrolling=false;
+                $("#loading").hide();
+            }
+            $(window).scroll(function(){
+                if($(window).scrollTop()+$(window).height()-$(document).height()>=-1){
+                    if(!scrolling){
+                        showLoading();
+                        setTimeout(function(){
+                            getList(10);
+                            //采用lastIndex进行分页，你可以转为当前页数
+                            detail2list.insertHtmlStr($("#list").html(),{lastIndex:listnum});
+                        },3000);
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

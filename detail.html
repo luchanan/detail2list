@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="keywords" content="" >
+        <meta name="description" content="">
+        <meta content="yes" name="apple-mobile-web-app-capable" />
+        <meta content="yes" name="apple-touch-fullscreen" />
+        <meta name="full-screen" content="yes">
+        <meta name="x5-fullscreen" content="true" />
+        <meta name="screen-orientation" content="portrait">
+        <meta name="x5-orientation" content="portrait">
+        <meta content="telephone=no,email=no" name="format-detection" />
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="demo.css">
+        <title>详情返回列表，保持原有列表位置，而不是重新刷新</title>
+    </head>
+    <body>
+        <fieldset>
+            <legend>为什么需要这样？</legend>
+            <p>1、h5上拉刷新来实现分页，当有很多页的话，点击列表某一页去详细，然后从详情返回上一页，可能刷新上一页，位置不能保持，体验不好</p>
+            <p>2、列表使用a链接过去的，详情使用window.history.go(-1)返回，有些浏览器不刷新上一页（ios中safari,UC等），有些页面刷新上一页（ios中微信等）</p>
+            <p>3、有说使用单页的话，可以保持。但是之前用过angular1.X来实现单页，返回貌似也有这个问题</p>
+            <p>4、有说列表用window.open，详情用window.history.go(-1)，h5实践了，不可以</p>
+        </fieldset>
+        <a href="javascript:window.history.go(-1)" class="back">返回列表</a>
+    </body>
+</html>
