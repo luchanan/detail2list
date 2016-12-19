@@ -27,7 +27,7 @@
             var detail2list=new h5Detail2list();
             var scrolling=false;
             var listnum=0;
-            if($.isEmptyObject(detail2list.getLocalStorage()['extraData'])){
+            if($.isEmptyObject(detail2list.getLocalStorage()['extraData'])||!detail2list.isBack()){
                 getList(20);
             }
             function getList(num){

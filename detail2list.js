@@ -19,6 +19,7 @@
        extraDataName:'extraData',
        currentTimeStampName:'currentTimeStamp',
        currentTimeStamp:(new Date()).getTime(),
+       addBack:true,//为列表添加一个标志
        expire:10*60*1000//过期时间,单位毫秒，默认10分钟
     };
     function detail2list(options){
@@ -34,6 +35,10 @@
             this.isExpire();
             this.windowBind();
             this.setLocalStorage(0);
+        },
+        isBack:function(){
+            //根据锚点，粗略判断是否点了返回，从detail返回了列表
+            return window.location.hash==''?false:true;
         },
         isExpire:function(){
             var current=(new Date).getTime();
@@ -56,19 +61,21 @@
                 //exist
                 storage=this.getLocalStorage();
                 if(type==0){
-                    $(this.settings.appendTo).html(storage[this.settings.dataStrName]);
-                    this.scroll2Y(storage[this.settings.scrollYName]);
-                    storage[this.settings.extraDataName]=storage[this.settings.extraDataName];
+                    if(this.isBack()&&this.settings.addBack){
+                        $(this.settings.appendTo).html(storage[this.settings.dataStrName]);
+                        this.scroll2Y(storage[this.settings.scrollYName]);
+                    }
+                    storage[this.settings.extraDataName]=this.isBack()&&this.settings.addBack?storage[this.settings.extraDataName]:{};
                 }
                 else if(type==1&&extraData!==undefined){
                     storage[this.settings.extraDataName]=extraData;
                 }
-                storage[this.settings.scrollYName]=this.settings.scrollY;
+                storage[this.settings.scrollYName]=this.isBack()&&this.settings.addBack?this.settings.scrollY:0;
                 storage[this.settings.dataStrName]=str===undefined?storage[this.settings.dataStrName]:str;;
                 window.localStorage.setItem(this.settings.name,this.string2json(storage));
             }
             else{
-                //not existc
+                //not exist
                 storage={};
                 storage[this.settings.currentTimeStampName]=this.settings.currentTimeStamp;
                 storage[this.settings.extraDataName]=this.settings.extraData;
@@ -93,11 +100,21 @@
             return window.localStorage.getItem(this.settings.name)===null?false:true;
         },
         windowBind:function(){
+            this.settings.first=true;
             $(window).scroll($.proxy(function(){
                 var scroll_top=$(window).scrollTop();
                 this.settings.scrollY=scroll_top;
+                this.replaceAnchor(scroll_top);
                 this.setLocalStorage(1);
             },this));
+        },
+        replaceAnchor:function(scroll_top){
+            if(this.settings.addBack){
+                //这样锚点滚动就会产生历史记录数
+                //window.location.hash="#"+this.settings.scrollYName+"="+scroll_top;
+                //这样锚点滚动不会产生历史记录数
+                window.location.replace("#"+this.settings.scrollYName+"="+scroll_top);
+            }
         },
         scroll2Y:function(scrolly){
             $("html,body").scrollTop(scrolly);
