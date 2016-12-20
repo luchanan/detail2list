@@ -11,8 +11,9 @@
 # 想到的办法 #
 1. 改交互方式，把上拉刷新改为类似美团美食h5那样，手动点下一页，稍微简单些（主要考虑了有上面弊端2的那种情况）
 2. 保持这样上拉刷新这样的交互方式。本地保存数据，记录滚动位置（插件采用这种方式）
-3. 列表记录当前页码，到顶部请求上一页，到底部请求下一页。（好麻烦，先放弃）
+3. 列表记录当前页码，到顶部请求上一页，到底部请求下一页。（好麻烦，先放弃，位置也不准确了）
 
-# 插件一些东西 #
-1. 列表滚动scrollTop值
-2. localStorage有过期时间，不用sessionStorage主要是因为有些安卓机的浏览器，跳页面会获取不到sessionStorage
+# 插件一些说明 #
+1. 列表滚动使用锚点获取scrollTop值，标志是否返回了列表
+2. localStorage有过期时间，不用sessionStorage主要是因为有些安卓机的浏览器，跳页面会获取不到sessionStorage值，比如UA:Mozilla/5.0 (Linux; U; Android 5.0.2; zh-CN; Redmi Note 2 Build/LRX22G) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/40.0.2214.89 UCBrowser/11.2.0.880 Mobile Safari/537.36
+3. 只有返回列表才执行本地数据，index.html到list.html会重新请求数据。
