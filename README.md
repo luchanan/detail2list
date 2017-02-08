@@ -1,10 +1,10 @@
-# 预览地址 #
+额# 预览地址 #
 [http://www.frontsucai.com/upload/file/20161221/detail2list/index.html](http://www.frontsucai.com/upload/file/20161221/detail2list/index.html)
 
 # 背景 #
 1. h5上拉刷新来实现分页，当有很多页的话，点击列表某一页去详细，然后从详情返回上一页，可能刷新上一页，位置不能保持，体验不好
 2. 列表使用a链接过去的，详情使用window.history.go(-1)返回，有些浏览器不刷新上一页（ios中safari,UC等），有些页面刷新上一页（ios中微信等）
-3. 有说使用单页的话，可以保持。但是之前用过angular1.X来实现单页，返回貌似也有这个问题（重新执行了列表js）
+3. 有说使用单页的话，可以保持。但是之前用过angular1.X来实现单页，返回貌似也有这个问题（重新执行了列表js），最近在github看到有用vue实现了这个的效果：[https://github.com/lzxb/vue-cnode?from=xitu](https://github.com/lzxb/vue-cnode?from=xitu)
 4. 有说列表用window.open，详情用window.history.go(-1)，h5实践了，不可以
 
 #弊端#
