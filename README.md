@@ -1,5 +1,5 @@
-额# 预览地址 #
-[http://www.frontsucai.com/upload/file/20161221/detail2list/index.html](http://www.frontsucai.com/upload/file/20161221/detail2list/index.html)
+# 预览地址 #
+[https://luchanan.github.io/detail2list/index.html](https://luchanan.github.io/detail2list/index.html)
 
 # 背景 #
 1. h5上拉刷新来实现分页，当有很多页的话，点击列表某一页去详细，然后从详情返回上一页，可能刷新上一页，位置不能保持，体验不好
