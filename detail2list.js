@@ -51,10 +51,10 @@
                 }
             }
         },
-        insertHtmlStr:function(str,extraData){
-            this.setLocalStorage(1,str,extraData);
+        insertHtmlStr:function(str,extraData,boolen){
+            this.setLocalStorage(1,str,extraData,boolen);
         },
-        setLocalStorage:function(type,str,extraData){
+        setLocalStorage:function(type,str,extraData,boolen){
             //type=0=>refresh or back，type=1=>scrolling
             var storage;
             if(this.existLocalStorageName()){
@@ -70,7 +70,11 @@
                 else if(type==1&&extraData!==undefined){
                     storage[this.settings.extraDataName]=extraData;
                 }
-                storage[this.settings.scrollYName]=this.isBack()&&this.settings.addBack?this.settings.scrollY:0;
+                if (boolen) {
+                    storage[this.settings.scrollYName] = storage.scrollY;
+                } else {
+                    storage[this.settings.scrollYName] = this.isBack() && this.settings.addBack ? this.settings.scrollY : 0;
+                }
                 storage[this.settings.dataStrName]=str===undefined?storage[this.settings.dataStrName]:str;;
                 window.localStorage.setItem(this.settings.name,this.string2json(storage));
             }
@@ -78,9 +82,9 @@
                 //not exist
                 storage={};
                 storage[this.settings.currentTimeStampName]=this.settings.currentTimeStamp;
-                storage[this.settings.extraDataName]=this.settings.extraData;
                 storage[this.settings.scrollYName]=this.settings.scrollY;
-                storage[this.settings.dataStrName]=this.settings.dataStr;
+                storage[this.settings.extraDataName] = extraData === undefined ? this.settings.extraData : extraData;
+                storage[this.settings.dataStrName] = str===undefined? this.settings.dataStr : str;
                 window.localStorage.setItem(this.settings.name,this.string2json(storage));
             }
         },
