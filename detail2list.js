@@ -85,7 +85,12 @@
             }
         },
         getLocalStorage:function(){
-            return this.json2string(window.localStorage.getItem(this.settings.name));
+            var data = window.localStorage.getItem(this.settings.name);
+            if(data){
+                return this.json2string(window.localStorage.getItem(this.settings.name));
+            }else{
+                return {};
+            }
         },
         removeLocalStorage:function(){
             window.localStorage.removeItem(this.settings.name);
